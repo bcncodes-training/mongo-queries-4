@@ -117,6 +117,25 @@ Pantoliano» y «Antonio Banderas».
 
 13. Actualizar el documento referido al disco «Recuerdos» de manera que la canción «El atardecer» tenga
 asignado el número 3 en vez de 5.
+
+        db.media.update( 
+          {Titulo:"Recuerdos"}, 
+          {$set:{"canciones.2.cancion":3}} 
+        )
+
 14. Actualizar el documento referido al disco «Recuerdos» de manera que en una sola operación se cambia el
 nombre del artista a «Los piratillas» y se muestre el documento resultante.
+
+        db.media.findAndModify({
+          query:{"Titulo":"Recuerdos"},
+          sort: {},
+          update: { "$set":{"Artista":"Los piratillas"}},
+          new: true,
+          fields: {},
+          upsert:false   
+        })
+
 15. Renombrar el nombre de la colección «media» a «multimedia».
+
+        db.media.renameCollection('multimedia')
+
