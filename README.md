@@ -31,10 +31,22 @@ operación.
           "leidos":3
           }
         )
+        
+        db.media.update({}, 
+          {"tipo": "Libro",
+          "Titulo": "Constantinopla",
+          "capitulos":12,
+          "leidos":3
+          }
+        )
      y a continuación incrementar en 5 unidades el valor de la clave «leídos».      
 
         db.media.update({"Titulo" :"Constantinopla" },
            { $inc: { quantity: +5, "leidos": 1 } }
+        )
+        
+        db.media.update({"Titulo" :"Constantinopla" },
+           { $inc: {"leidos": 5 } }
         )
        
 4. Actualizar el documento referido a la película «Matrix» cambiando el valor de la clave «género» a «ciencia
@@ -45,6 +57,8 @@ ficción».
 5. Actualizar el documento referido al libro «Java para todos» de manera que se elimine la clave «editorial».
 
         db.media.update({"titulo" :"Java para todos" },{$unset : {"editorial":""}})
+
+        db.media.update({"titulo" :"Java para todos" },{$unset : {"editorial":1}})
 
 6. Actualizar el documento referido al libro «Java para todos» añadiendo el autor «María Sancho» al array de
 autores.
@@ -121,6 +135,11 @@ asignado el número 3 en vez de 5.
         db.media.update( 
           {Titulo:"Recuerdos"}, 
           {$set:{"canciones.2.cancion":3}} 
+        )
+        
+        db.media.update( 
+          {Titulo:"Recuerdos",canciones:{$elemMatch:{titulo:"El atardecer"}}}, 
+          {$set:{"canciones.$.cancion":3}} 
         )
 
 14. Actualizar el documento referido al disco «Recuerdos» de manera que en una sola operación se cambia el
