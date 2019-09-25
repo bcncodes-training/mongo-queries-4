@@ -128,11 +128,8 @@ nombre del artista a «Los piratillas» y se muestre el documento resultante.
 
         db.media.findAndModify({
           query:{"Titulo":"Recuerdos"},
-          sort: {},
           update: { "$set":{"Artista":"Los piratillas"}},
           new: true,
-          fields: {},
-          upsert:false   
         })
 
 15. Renombrar el nombre de la colección «media» a «multimedia».
